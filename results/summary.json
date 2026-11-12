@@ -1,0 +1,374 @@
+{
+ "updated": "2026-11-12T12:44:32.761635+00:00",
+ "live_start": "2026-11-12",
+ "notes": [],
+ "strategies": [
+  {
+   "id": "btc_trend",
+   "name": "Bitcoin trend following (50/200-day)",
+   "class": "Crypto",
+   "benchmark": "BTC",
+   "backtest": {
+    "start": "2018-01-01",
+    "end": "2026-11-12",
+    "years": 8.86,
+    "total_return": 2.966052548010098,
+    "cagr": 0.16819771185040078,
+    "max_drawdown": -0.6325018822841915,
+    "volatility": 0.48964572830123926,
+    "sharpe": 0.566235052283006
+   },
+   "benchmark_stats": {
+    "start": "2018-01-01",
+    "end": "2026-11-12",
+    "years": 8.86,
+    "total_return": 4.7770147285117615,
+    "cagr": 0.21884236788590172,
+    "max_drawdown": -0.8035767715724893,
+    "volatility": 0.6263277726131815,
+    "sharpe": 0.6325358276513865
+   },
+   "trades": 18,
+   "fees_paid": 1.347967753052911,
+   "position": {
+    "BTC": 1.0
+   },
+   "live_value": 9.854534873081754,
+   "last_bar": "2026-11-12 00:00:00",
+   "live_equity": {
+    "2026-11-11 00:00:00": 10.0,
+    "2026-11-12 00:00:00": 9.8545
+   },
+   "live_trades": []
+  },
+  {
+   "id": "eth_breakout",
+   "name": "Ether 20-day breakout",
+   "class": "Crypto",
+   "benchmark": "ETH",
+   "backtest": {
+    "start": "2018-01-01",
+    "end": "2026-11-12",
+    "years": 8.86,
+    "total_return": 28.656643769844692,
+    "cagr": 0.4659133434678262,
+    "max_drawdown": -0.5154884408690903,
+    "volatility": 0.5198151015081445,
+    "sharpe": 0.9933155931719255
+   },
+   "benchmark_stats": {
+    "start": "2018-01-01",
+    "end": "2026-11-12",
+    "years": 8.86,
+    "total_return": 1.8326585170621015,
+    "cagr": 0.124666525075255,
+    "max_drawdown": -0.93489778810133,
+    "volatility": 0.8228048004170616,
+    "sharpe": 0.5592247370202528
+   },
+   "trades": 127,
+   "fees_paid": 62.240812744666066,
+   "position": {},
+   "live_value": 10.0,
+   "last_bar": "2026-11-12 00:00:00",
+   "live_equity": {
+    "2026-11-11 00:00:00": 10.0,
+    "2026-11-12 00:00:00": 10.0
+   },
+   "live_trades": []
+  },
+  {
+   "id": "btc_intraday",
+   "name": "Bitcoin intraday mean reversion (hourly)",
+   "class": "Day trading",
+   "benchmark": "BTC",
+   "backtest": {
+    "start": "2024-11-13",
+    "end": "2026-11-12",
+    "years": 2.0,
+    "total_return": -0.8854821140679463,
+    "cagr": -0.6623487018858183,
+    "max_drawdown": -0.8870772561366831,
+    "volatility": 0.22800261555770393,
+    "sharpe": -4.651262445740554
+   },
+   "benchmark_stats": {
+    "start": "2024-11-13",
+    "end": "2026-11-12",
+    "years": 2.0,
+    "total_return": -0.20907544569716363,
+    "cagr": -0.11087518794790452,
+    "max_drawdown": -0.5258903834612378,
+    "volatility": 0.4417417412817769,
+    "sharpe": -0.0452387276716618
+   },
+   "trades": 705,
+   "fees_paid": 9.587905467547282,
+   "position": {
+    "BTC": 1.0
+   },
+   "live_value": 9.970089730807578,
+   "last_bar": "2026-11-12 12:00:00",
+   "live_equity": {
+    "2026-11-11 00:00:00": 10.0,
+    "2026-11-12 00:00:00": 9.9701
+   },
+   "live_trades": [
+    {
+     "time": "2026-11-12 12:00:00",
+     "asset": "BTC",
+     "side": "BUY",
+     "units": 0.00015174243618032473,
+     "price": 65704.031,
+     "value": 9.970089730807578,
+     "fee": 0.029910269192422734,
+     "strategy": "Bitcoin intraday mean reversion (hourly)"
+    }
+   ]
+  },
+  {
+   "id": "spy_hold",
+   "name": "S&P 500 ETF buy and hold (benchmark)",
+   "class": "ETF",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.2010227292359412,
+    "sharpe": 0.8016173607155891
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 0,
+   "fees_paid": 0.0,
+   "position": {
+    "SPY": 1.0
+   }
+  },
+  {
+   "id": "etf_rotation",
+   "name": "ETF rotation, top 2 of 5, monthly",
+   "class": "ETF",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 1.0937135524118733,
+    "cagr": 0.08700963692759367,
+    "max_drawdown": -0.2581704118364718,
+    "volatility": 0.16856071803743689,
+    "sharpe": 0.5805724761703204
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 236,
+   "fees_paid": 0.5560407701414427,
+   "position": {
+    "SPY": 0.5002460556011947,
+    "EFA": 0.4997539443988053
+   }
+  },
+  {
+   "id": "stock_momentum",
+   "name": "Stock momentum, top 3 of 12, monthly",
+   "class": "Stocks",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 10.185301816731851,
+    "cagr": 0.3134039650740874,
+    "max_drawdown": -0.32631895746175743,
+    "volatility": 0.27536498703154116,
+    "sharpe": 1.1305551491409904
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 392,
+   "fees_paid": 3.2231513045497637,
+   "position": {
+    "AAPL": 0.3496121779804619,
+    "MSFT": 0.3417835611715776,
+    "XOM": 0.3086042608479605
+   }
+  },
+  {
+   "id": "spy_rsi2",
+   "name": "Short-term mean reversion on S&P 500 ETF",
+   "class": "ETF",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 0.1642320576375833,
+    "cagr": 0.01731686266806043,
+    "max_drawdown": -0.12217315167639942,
+    "volatility": 0.06253105007033999,
+    "sharpe": 0.3065018888688378
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 128,
+   "fees_paid": 1.3954629019586458,
+   "position": {}
+  },
+  {
+   "id": "futures_trend",
+   "name": "Futures trend, S&P / gold / oil, long-short",
+   "class": "Futures",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-12",
+    "years": 8.86,
+    "total_return": -0.3844628890413563,
+    "cagr": -0.05329874740520191,
+    "max_drawdown": -0.4720192159774772,
+    "volatility": 0.17626249061227708,
+    "sharpe": -0.22282556848563762
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 1053,
+   "fees_paid": 1.0270132002710886,
+   "position": {
+    "ES": 0.3333333333333333,
+    "GC": -0.3333333333333333,
+    "BZ": 0.3333333333333333
+   },
+   "live_value": 10.02700301258328,
+   "last_bar": "2026-11-12 00:00:00",
+   "live_equity": {
+    "2026-11-11 00:00:00": 10.0,
+    "2026-11-12 00:00:00": 10.027
+   },
+   "live_trades": [
+    {
+     "time": "2026-11-12 00:00:00",
+     "asset": "GC",
+     "side": "SELL",
+     "units": 9.326709418090805e-06,
+     "price": 3555.8562215306906,
+     "value": 0.03316443771072708,
+     "fee": 1.6582218855363538e-05,
+     "strategy": "Futures trend, S&P / gold / oil, long-short"
+    },
+    {
+     "time": "2026-11-12 00:00:00",
+     "asset": "BZ",
+     "side": "BUY",
+     "units": 0.08033813279462704,
+     "price": 83.13714878455781,
+     "value": 6.67908329922047,
+     "fee": 0.003339541649610235,
+     "strategy": "Futures trend, S&P / gold / oil, long-short"
+    }
+   ]
+  },
+  {
+   "id": "covered_call",
+   "name": "Covered call on S&P 500 ETF (model-priced)",
+   "class": "Options",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 3.1353047471026887,
+    "cagr": 0.1738354594452003,
+    "max_drawdown": -0.28142049917392753,
+    "volatility": 0.16250842791786715,
+    "sharpe": 1.0702410040880859
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 214,
+   "fees_paid": 1.594032096819414,
+   "position": "shares + short call, strike 693.90, 20 trading days left"
+  },
+  {
+   "id": "cash_secured_put",
+   "name": "Cash-secured put on S&P 500 ETF (model-priced)",
+   "class": "Options",
+   "benchmark": "SPY",
+   "backtest": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 1.1644817043421893,
+    "cagr": 0.09109703415917525,
+    "max_drawdown": -0.2424763259824645,
+    "volatility": 0.12764746150683343,
+    "sharpe": 0.7485751272288602
+   },
+   "benchmark_stats": {
+    "start": "2018-01-02",
+    "end": "2026-11-11",
+    "years": 8.86,
+    "total_return": 2.4717173231460228,
+    "cagr": 0.15088134117094065,
+    "max_drawdown": -0.33091128007257,
+    "volatility": 0.20102272923594117,
+    "sharpe": 0.8016173607155891
+   },
+   "trades": 214,
+   "fees_paid": 1.1080018342760138,
+   "position": "cash + short put, strike 666.68, 20 trading days left"
+  }
+ ]
+}
