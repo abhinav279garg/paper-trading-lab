@@ -2,7 +2,7 @@
 
 **Simulated money only.** Ten rule-based strategies, each starting with an imaginary €10 on 2026-11-12. No broker is connected and no real order is ever placed. This is an experiment, not investment advice.
 
-_Last updated: 2026-11-12 12:45 UTC. Updated automatically once a day by GitHub Actions._
+_Last updated: 2026-11-12 12:46 UTC. Updated automatically once a day by GitHub Actions._
 
 ## Live paper portfolio since 2026-11-12
 
