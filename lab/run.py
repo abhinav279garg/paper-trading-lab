@@ -14,7 +14,9 @@ import matplotlib.ticker  # noqa: F401
 import pandas as pd
 
 from . import data
-from .config import BACKTEST_START, COST, LIVE_START, START_CAPITAL
+import csv
+
+from .config import BACKTEST_START, COST, LIVE_START, RULES_FROZEN, SPLIT_DATE, START_CAPITAL
 from .engine import stats
 from .strategies import STRATEGIES
 
@@ -55,6 +57,13 @@ def evaluate(daily, hourly):
                "trades": len(bt_trades),
                "fees_paid": float(sum(t["fee"] for t in bt_trades) * scale_bt),
                "position": position, "bt_eq": bt_eq, "bench_eq": bench_eq}
+        split = pd.Timestamp(SPLIT_DATE)
+        if bt_eq.index[0] < split < bt_eq.index[-1]:
+            halves = []
+            for a, bb in ((bt_eq[bt_eq.index < split], bench_eq[bench_eq.index < split]),
+                          (bt_eq[bt_eq.index >= split], bench_eq[bench_eq.index >= split])):
+                halves.append((float(a.iloc[-1] / a.iloc[0] - 1), float(bb.iloc[-1] / bb.iloc[0] - 1)))
+            row["halves"] = halves
         before = eq[eq.index < live_start]
         after = eq[eq.index >= live_start]
         if len(before):
@@ -62,12 +71,65 @@ def evaluate(daily, hourly):
             live_eq = pd.concat([before.iloc[-1:], after]) * scale
             row["live_eq"] = live_eq
             row["live_value"] = float(live_eq.iloc[-1])
-            row["live_trades"] = [dict(t, strategy=name, units=t["units"] * scale,
+            row["live_trades"] = [dict(t, strategy=name, strategy_id=sid, units=t["units"] * scale,
                                        value=t["value"] * scale, fee=t["fee"] * scale)
                                   for t in trades if t["time"] >= live_start]
             row["last_bar"] = str(eq.index[-1])
         out.append(row)
     return out
+
+
+def ledger(rows):
+    """Append-only record. A trade or daily value is written once, on the run that first sees it,
+    and never rewritten. If a later recomputation disagrees with the record, that is reported."""
+    folder = os.path.join(ROOT, "results")
+    os.makedirs(folder, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    notes = []
+
+    def load_rows(path):
+        return list(csv.DictReader(open(path))) if os.path.exists(path) else []
+
+    def append(path, fields, new):
+        fresh = not os.path.exists(path)
+        with open(path, "a", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=fields)
+            if fresh:
+                w.writeheader()
+            w.writerows(new)
+
+    tpath = os.path.join(folder, "ledger.csv")
+    recorded = load_rows(tpath)
+    seen = {(r["strategy_id"], r["time"], r["asset"], r["side"]) for r in recorded}
+    current, new = set(), []
+    for r in rows:
+        for t in r.get("live_trades", []):
+            key = (t["strategy_id"], str(t["time"]), t["asset"], t["side"])
+            current.add(key)
+            if key not in seen:
+                new.append({"recorded_at": stamp, "strategy_id": key[0], "time": key[1], "asset": key[2],
+                            "side": key[3], "units": f"{t['units']:.8g}", "price": f"{t['price']:.8g}",
+                            "value": f"{t['value']:.6f}", "fee": f"{t['fee']:.6f}"})
+    append(tpath, ["recorded_at", "strategy_id", "time", "asset", "side", "units", "price", "value", "fee"], new)
+    live_ids = {r["id"] for r in rows if "live_trades" in r}
+    gone = [k for k in seen if k not in current and k[0] in live_ids]
+    if gone:
+        notes.append(f"{len(gone)} recorded trade(s) no longer appear when history is recomputed "
+                     "(price data was revised). The original record in results/ledger.csv is kept.")
+
+    epath = os.path.join(folder, "equity_log.csv")
+    have = {(r["strategy_id"], r["bar"]) for r in load_rows(epath)}
+    new = []
+    for r in rows:
+        if "live_eq" not in r:
+            continue
+        daily = r["live_eq"].resample("D").last().dropna()
+        for bar, value in daily.iloc[:-1].items() if r["id"] == "btc_intraday" else daily.items():
+            key = (r["id"], str(bar)[:10])
+            if key not in have:
+                new.append({"recorded_at": stamp, "strategy_id": key[0], "bar": key[1], "value": f"{value:.4f}"})
+    append(epath, ["recorded_at", "strategy_id", "bar", "value"], new)
+    return notes
 
 
 def charts(rows):
@@ -153,11 +215,30 @@ def readme(rows, notes):
         L.append(f"| {i} | {r['name']} | {s['start']} → {s['end']} | {pct(s['total_return'])} | {pct(s['cagr'])} | "
                  f"{pct(s['max_drawdown'])} | {s['sharpe']:.2f} | {pct(b['total_return'])} | "
                  f"{pct(b['max_drawdown'])} | {r['trades']} | {eur(r['fees_paid'])} |")
+    L += ["", "### The same backtest, split in two halves", "",
+          "If a rule only worked in one half, its overall number is weak evidence.", "",
+          f"| # | Strategy | Before {SPLIT_DATE[:4]}: strategy | hold | From {SPLIT_DATE[:4]}: strategy | hold | Beat hold in both halves? |",
+          "|---|---|---|---|---|---|---|"]
+    for i, r in enumerate(rows, 1):
+        if "halves" not in r:
+            L.append(f"| {i} | {r['name']} | n/a | n/a | n/a | n/a | history too short |")
+            continue
+        (s1, b1), (s2, b2) = r["halves"]
+        verdict = "is the benchmark" if r["id"] == "spy_hold" else ("yes" if s1 > b1 and s2 > b2 else "no")
+        L.append(f"| {i} | {r['name']} | {pct(s1)} | {pct(b1)} | {pct(s2)} | {pct(b2)} | {verdict} |")
     L += ["", "![Backtest charts](charts/backtest.png)", "",
+          "## How the live record is kept honest", "",
+          f"- **Rules frozen on {RULES_FROZEN}.** No parameter was tuned to fit the backtest (they are standard "
+          "textbook values), and none will be changed. If a rule is ever changed, its live record restarts.",
+          "- **Append-only ledger.** Every simulated trade is written to `results/ledger.csv` and every daily "
+          "value to `results/equity_log.csv` on the day it happens, and those rows are never rewritten. "
+          "The git history of this repository timestamps each entry, so the record cannot be adjusted afterwards.",
+          "- **Judge it at 3 to 6 months**, against simply holding the S&P 500 ETF (strategy 4), not before.", "",
           "## Read this before believing any number above", "",
           "- **Past results do not predict future results.** A rule that worked in a backtest often stops working.",
-          "- **Stock momentum is flattered by hindsight.** Its 12 stocks were picked today from companies that "
-          "are already large, so the backtest only ever chooses among known winners.",
+          "- **Stock momentum still has some bias.** Its universe is the 12 largest US companies at the end of "
+          "2017, so it no longer picks from today's winners. But 12 giants that all survived is a small and "
+          "favourable sample.",
           "- **Options are model-priced.** There is no free historical options data, so strategies 9 and 10 "
           "use a pricing formula with the VIX index as volatility and a "
           f"{COST['option_haircut'] * 100:.0f}% spread haircut, plus a rough adjustment for calls. "
@@ -189,6 +270,7 @@ def main():
         notes.append("No hourly Bitcoin prices available; the intraday strategy is not running.")
         hourly = pd.Series(dtype=float)
     rows = evaluate(daily, hourly)
+    notes += ledger(rows)
     charts(rows)
     readme(rows, notes)
     os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)

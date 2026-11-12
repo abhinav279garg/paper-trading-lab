@@ -2,7 +2,9 @@
 
 START_CAPITAL = 10.0           # euros per strategy (simulated)
 LIVE_START = "2026-11-12"      # the day the paper portfolio went live
+RULES_FROZEN = "2026-11-12"   # rules must not change after this; a change restarts the live record
 BACKTEST_START = "2018-01-01"
+SPLIT_DATE = "2022-01-01"      # the backtest is also reported as two separate halves
 DOWNLOAD_START = "2016-01-01"  # extra history so indicators are warmed up
 
 # Yahoo Finance symbols. Everything priced in USD is converted to EUR with EURUSD.
@@ -11,12 +13,14 @@ SYMBOLS = {
     "SPY": "SPY", "QQQ": "QQQ", "EFA": "EFA", "TLT": "TLT", "GLD": "GLD",
     "ES": "ES=F", "GC": "GC=F", "BZ": "BZ=F",
     "VIX": "^VIX", "EURUSD": "EURUSD=X",
-    "AAPL": "AAPL", "MSFT": "MSFT", "NVDA": "NVDA", "AMZN": "AMZN", "GOOGL": "GOOGL",
-    "META": "META", "JPM": "JPM", "XOM": "XOM", "JNJ": "JNJ", "PG": "PG", "KO": "KO", "WMT": "WMT",
+    "AAPL": "AAPL", "GOOGL": "GOOGL", "MSFT": "MSFT", "AMZN": "AMZN", "META": "META", "BRK": "BRK-B",
+    "JNJ": "JNJ", "XOM": "XOM", "JPM": "JPM", "BAC": "BAC", "WFC": "WFC", "WMT": "WMT",
 }
 ALREADY_EUR = {"BTC", "ETH"}
 NOT_A_PRICE = {"VIX", "EURUSD"}
-STOCKS = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "JPM", "XOM", "JNJ", "PG", "KO", "WMT"]
+# Point-in-time universe: the 12 largest US companies by market value at the end of 2017, i.e. chosen
+# with information available at the start of the backtest, not with today's hindsight.
+STOCKS = ["AAPL", "GOOGL", "MSFT", "AMZN", "META", "BRK", "JNJ", "XOM", "JPM", "BAC", "WFC", "WMT"]
 ROTATION_ETFS = ["SPY", "QQQ", "EFA", "TLT", "GLD"]
 FUTURES = ["ES", "GC", "BZ"]
 
