@@ -83,5 +83,12 @@ def load():
             d[col] = raw[col] / fx
     price_cols = [c for c in d.columns if c != "EURUSD"]
     d[price_cols] = d[price_cols].where(d[price_cols] > 0)
+    # Never act on an unfinished bar: crypto days close at 00:00 UTC, US markets by about 21:30 UTC.
+    now = pd.Timestamp.now(tz="UTC").tz_localize(None)
+    today = now.normalize()
+    if today in d.index:
+        unfinished = [c for c in d.columns if c in ALREADY_EUR or now.hour * 60 + now.minute < 21 * 60 + 30]
+        d.loc[today, unfinished] = float("nan")
     hourly = _read(HOURLY)
+    hourly = hourly[hourly.index <= now.floor("h") - pd.Timedelta(hours=1)]
     return d, (hourly["BTC"] if "BTC" in hourly else pd.Series(dtype=float))

@@ -57,7 +57,7 @@ def evaluate(daily, hourly):
                "position": position, "bt_eq": bt_eq, "bench_eq": bench_eq}
         before = eq[eq.index < live_start]
         after = eq[eq.index >= live_start]
-        if len(before) and len(after):
+        if len(before):
             scale = START_CAPITAL / before.iloc[-1]
             live_eq = pd.concat([before.iloc[-1:], after]) * scale
             row["live_eq"] = live_eq
@@ -84,16 +84,18 @@ def charts(rows):
         ax.set_yscale("log")
         ax.set_title(r["name"], fontsize=9, color=INK, loc="left")
         ax.tick_params(labelsize=7, colors=MUTED, length=0)
+        ax.yaxis.set_major_locator(matplotlib.ticker.LogLocator(base=10, subs=(1, 2, 5), numticks=12))
         ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"€{v:g}"))
-        ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+        ax.yaxis.set_minor_locator(matplotlib.ticker.NullLocator())
         ax.grid(True, which="major", color="#e6e5e0", lw=0.6)
         for s in ax.spines.values():
             s.set_visible(False)
-        ax.legend(fontsize=7, frameon=False, loc="upper left", labelcolor=MUTED)
+        ax.text(0.99, 0.03, f"gray: buy & hold {r['benchmark']}", transform=ax.transAxes, ha="right",
+                fontsize=7, color=MUTED)
     for ax in axes.ravel()[len(good):]:
         ax.axis("off")
-    fig.suptitle("Backtest: growth of €10 (log scale), after fees, vs. simply holding the asset",
-                 fontsize=11, color=INK, x=0.01, ha="left")
+    fig.suptitle("Backtest: growth of €10 (log scale), after fees.  Blue: strategy.  Gray: simply holding the asset.",
+                 fontsize=10, color=INK, x=0.01, ha="left")
     fig.tight_layout(rect=(0, 0, 1, 0.98))
     fig.savefig(os.path.join(ROOT, "charts", "backtest.png"), dpi=130)
     plt.close(fig)
@@ -158,7 +160,10 @@ def readme(rows, notes):
           "are already large, so the backtest only ever chooses among known winners.",
           "- **Options are model-priced.** There is no free historical options data, so strategies 9 and 10 "
           "use a pricing formula with the VIX index as volatility and a "
-          f"{COST['option_haircut'] * 100:.0f}% spread haircut. Real results would differ.",
+          f"{COST['option_haircut'] * 100:.0f}% spread haircut, plus a rough adjustment for calls. "
+          "The covered-call result in particular depends on that assumption; real covered-call funds "
+          "have lagged the index over this period. Do not read it as beating buy and hold.",
+          "- **Day trading loses to fees.** The hourly Bitcoin rule trades hundreds of times, and each trade pays the fee.",
           "- **Futures at €10 are not possible in reality.** One contract needs thousands of euros of margin. "
           "The simulation allows fractions to show how the rule behaves. Prices are front-month series with roll gaps.",
           "- **Real fees at this size would be worse.** Costs are modelled as a percentage "

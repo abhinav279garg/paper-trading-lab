@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from .config import COST, FUTURES, ROTATION_ETFS, START_CAPITAL, STOCKS
+from .config import CALL_VOL_FACTOR, COST, FUTURES, PUT_VOL_FACTOR, ROTATION_ETFS, START_CAPITAL, STOCKS
 from .engine import changes_only, simulate, simulate_option_writer
 
 
@@ -114,12 +114,12 @@ def futures_trend(d):
 
 
 def covered_call(d):
-    return simulate_option_writer(d["SPY"], d["VIX"] / 100, "call", START_CAPITAL,
+    return simulate_option_writer(d["SPY"], d["VIX"] / 100 * CALL_VOL_FACTOR, "call", START_CAPITAL,
                                   COST["equity"], COST["option_haircut"])
 
 
 def cash_secured_put(d):
-    return simulate_option_writer(d["SPY"], d["VIX"] / 100, "put", START_CAPITAL,
+    return simulate_option_writer(d["SPY"], d["VIX"] / 100 * PUT_VOL_FACTOR, "put", START_CAPITAL,
                                   COST["equity"], COST["option_haircut"])
 
 

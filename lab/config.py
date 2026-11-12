@@ -27,3 +27,7 @@ COST = {
     "futures": 0.0005,
     "option_haircut": 0.05,  # share of the model premium lost to the bid/ask spread
 }
+# Options above the market price trade at lower implied volatility than the VIX index (the "skew").
+# Without this adjustment the model overpays the covered-call seller. Rough assumption, not data.
+CALL_VOL_FACTOR = 0.85
+PUT_VOL_FACTOR = 1.00
