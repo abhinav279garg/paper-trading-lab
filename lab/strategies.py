@@ -8,6 +8,10 @@ from .config import CALL_VOL_FACTOR, COST, FUTURES, PUT_VOL_FACTOR, ROTATION_ETF
 from .engine import changes_only, simulate, simulate_option_writer
 
 
+def _spec(px, targets, cost, freq):
+    return {"kind": "weights", "prices": px, "targets": targets, "cost": cost, "freq": freq}
+
+
 def _one(prices: pd.Series, signal: pd.Series, name: str) -> pd.DataFrame:
     return changes_only(signal.astype(float).to_frame(name)), prices.to_frame(name)
 
@@ -16,7 +20,7 @@ def btc_trend(d):
     p = d["BTC"].dropna()
     sig = (p.rolling(50).mean() > p.rolling(200).mean())
     t, px = _one(p, sig, "BTC")
-    return simulate(px, t, COST["crypto"], START_CAPITAL)
+    return _spec(px, t, COST["crypto"], "crypto_daily")
 
 
 def eth_breakout(d):
@@ -30,7 +34,7 @@ def eth_breakout(d):
             held = False
         pos.append(held)
     t, px = _one(p, pd.Series(pos, index=p.index), "ETH")
-    return simulate(px, t, COST["crypto"], START_CAPITAL)
+    return _spec(px, t, COST["crypto"], "crypto_daily")
 
 
 def btc_intraday(hourly):
@@ -45,25 +49,27 @@ def btc_intraday(hourly):
         age += 1
         pos.append(held)
     t, px = _one(p, pd.Series(pos, index=p.index), "BTC")
-    return simulate(px, t, COST["crypto"], START_CAPITAL)
+    return _spec(px, t, COST["crypto"], "hourly")
 
 
 def spy_hold(d):
     p = d["SPY"].dropna()
     t, px = _one(p, pd.Series(True, index=p.index), "SPY")
-    return simulate(px, t, COST["equity"], START_CAPITAL)
+    return _spec(px, t, COST["equity"], "us_daily")
 
 
-def _month_ends(index):
-    s = pd.Series(index, index=index)
-    return s.groupby([index.year, index.month]).max().to_numpy()
+def _month_starts(index):
+    """First trading bar of each month. Known on the day itself, so usable live without hindsight."""
+    months = pd.Series(index.year * 12 + index.month, index=index)
+    return index[(months != months.shift(1)).to_numpy()][1:]
 
 
 def _rotation(prices, top, lookback, require_positive):
+    # decided on the first trading day of each month, traded on the next close
     px = prices.dropna()
     mom = px.pct_change(lookback)
     t = pd.DataFrame(np.nan, index=px.index, columns=px.columns)
-    for day in _month_ends(px.index):
+    for day in _month_starts(px.index):
         m = mom.loc[day]
         if m.isna().any():
             continue
@@ -78,12 +84,12 @@ def _rotation(prices, top, lookback, require_positive):
 
 def etf_rotation(d):
     px, t = _rotation(d[ROTATION_ETFS], top=2, lookback=126, require_positive=True)
-    return simulate(px, t, COST["equity"], START_CAPITAL)
+    return _spec(px, t, COST["equity"], "us_daily")
 
 
 def stock_momentum(d):
     px, t = _rotation(d[STOCKS], top=3, lookback=126, require_positive=False)
-    return simulate(px, t, COST["equity"], START_CAPITAL)
+    return _spec(px, t, COST["equity"], "us_daily")
 
 
 def spy_rsi2(d):
@@ -101,7 +107,7 @@ def spy_rsi2(d):
             held = False
         pos.append(held)
     t, px = _one(p, pd.Series(pos, index=p.index), "SPY")
-    return simulate(px, t, COST["equity"], START_CAPITAL)
+    return _spec(px, t, COST["equity"], "us_daily")
 
 
 def futures_trend(d):
@@ -110,17 +116,28 @@ def futures_trend(d):
     w = above.astype(float) * 2 - 1          # +1 long, -1 short
     w[px.rolling(100).mean().isna()] = 0.0
     t = changes_only(w / len(FUTURES))
-    return simulate(px, t, COST["futures"], START_CAPITAL)
+    return _spec(px, t, COST["futures"], "us_daily")
+
+
+def _option(d, kind, factor):
+    return {"kind": "option", "opt": kind, "spot": d["SPY"], "vol": d["VIX"] / 100 * factor,
+            "stock_cost": COST["equity"], "haircut": COST["option_haircut"], "freq": "us_daily"}
 
 
 def covered_call(d):
-    return simulate_option_writer(d["SPY"], d["VIX"] / 100 * CALL_VOL_FACTOR, "call", START_CAPITAL,
-                                  COST["equity"], COST["option_haircut"])
+    return _option(d, "call", CALL_VOL_FACTOR)
 
 
 def cash_secured_put(d):
-    return simulate_option_writer(d["SPY"], d["VIX"] / 100 * PUT_VOL_FACTOR, "put", START_CAPITAL,
-                                  COST["equity"], COST["option_haircut"])
+    return _option(d, "put", PUT_VOL_FACTOR)
+
+
+def backtest(spec):
+    """Run a strategy spec over all its history. Returns (equity, trades, final position)."""
+    if spec["kind"] == "option":
+        return simulate_option_writer(spec["spot"], spec["vol"], spec["opt"], START_CAPITAL,
+                                      spec["stock_cost"], spec["haircut"])
+    return simulate(spec["prices"], spec["targets"], spec["cost"], START_CAPITAL)
 
 
 # id, name, asset class, benchmark column, bars per year, function, uses hourly data

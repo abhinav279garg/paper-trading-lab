@@ -2,7 +2,9 @@ name: Paper trading (simulated)
 
 on:
   schedule:
-    - cron: "17 22 * * *"   # once a day, after the US market close
+    - cron: "17 22 * * *"   # daily: all strategies, after the US market close
+    - cron: "37 0 * * *"    # daily: all strategies again, after the crypto day closes at 00:00 UTC
+    - cron: "7 * * * *"     # hourly: only the intraday Bitcoin strategy
   workflow_dispatch:
   push:
     branches: [main]
@@ -27,12 +29,27 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt pytest
       - run: python -m pytest -q
-      - run: python -m lab.run
-      - name: Commit updated results
+      - name: Run
+        id: run
+        run: |
+          if [ "${{ github.event.schedule }}" = "7 * * * *" ]; then
+            python -m lab.run --mode hourly
+            echo "mode=hourly" >> "$GITHUB_OUTPUT"
+          else
+            python -m lab.run
+            echo "mode=daily" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Commit the record
         run: |
           git config user.name "paper-trading-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md results charts data
-          git diff --cached --quiet || git commit -m "Daily paper-trading update [skip ci]"
+          if [ "${{ steps.run.outputs.mode }}" = "hourly" ]; then
+            git add README.md results charts
+          else
+            git add README.md results charts data
+          fi
+          if git diff --cached --quiet; then echo "nothing to record"; exit 0; fi
+          git commit -m "Paper-trading record (${{ steps.run.outputs.mode }}) [skip ci]"
+          git stash -u || true
           git pull --rebase origin main
           git push

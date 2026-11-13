@@ -1,10 +1,8 @@
 """Settings for the paper-trading lab. Simulated money only: nothing here places orders."""
 
 START_CAPITAL = 10.0           # euros per strategy (simulated)
-LIVE_START = "2026-11-12"      # the day the paper portfolio went live
-RULES_FROZEN = "2026-11-12"   # rules must not change after this; a change restarts the live record
 BACKTEST_START = "2018-01-01"
-SPLIT_DATE = "2022-01-01"      # the backtest is also reported as two separate halves
+SPLIT_DATE = "2022-01-01"      # the backtest is also reported as two separate halves (a consistency check)
 DOWNLOAD_START = "2016-01-01"  # extra history so indicators are warmed up
 
 # Yahoo Finance symbols. Everything priced in USD is converted to EUR with EURUSD.

@@ -57,14 +57,18 @@ def refresh():
             notes.append("No fresh daily prices for: " + ", ".join(missing))
     else:
         notes.append("Daily price download failed; using cached prices.")
+    return notes + refresh_hourly()
+
+
+def refresh_hourly():
+    os.makedirs(DATA_DIR, exist_ok=True)
     hourly = _download("BTC-EUR", period="730d", interval="1h")
     if len(hourly):
         hourly.columns = ["BTC"]
         merged = hourly.combine_first(_read(HOURLY)).sort_index()
         merged.to_csv(HOURLY, float_format="%.8g")
-    else:
-        notes.append("Hourly Bitcoin download failed; using cached prices.")
-    return notes
+        return []
+    return ["Hourly Bitcoin download failed; using cached prices."]
 
 
 def load():

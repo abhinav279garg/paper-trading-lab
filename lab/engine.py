@@ -8,10 +8,22 @@ import numpy as np
 import pandas as pd
 
 
+def rebalance(cash: float, units: np.ndarray, px: np.ndarray, weights: np.ndarray, cost: float):
+    """Move a portfolio to target weights at prices px. The fee is paid out of the same money.
+    Returns (new_units, new_cash, fee, delta_units, portfolio value before the trade)."""
+    value = cash + float((units * px).sum())
+    fee = 0.0
+    for _ in range(8):
+        want = weights * (value - fee) / px
+        delta = want - units
+        fee = float((np.abs(delta) * px).sum()) * cost
+    return want, value - fee - float((want * px).sum()), fee, delta, value
+
+
 def simulate(prices: pd.DataFrame, targets: pd.DataFrame, cost: float, capital: float):
-    """prices: one column per asset. targets: desired portfolio weights, a row only on bars where
-    the rule wants to change the portfolio (other rows NaN). Weights may be negative (short).
-    Returns (equity series, list of trades)."""
+    """Backtest. prices: one column per asset, no gaps. targets: desired portfolio weights, a row only
+    on bars where the rule wants to change the portfolio (other rows NaN). Weights may be negative.
+    Returns (equity series, list of trades, final position weights)."""
     prices = prices.astype(float)
     targets = targets.reindex(prices.index)
     cols = list(prices.columns)
@@ -24,29 +36,20 @@ def simulate(prices: pd.DataFrame, targets: pd.DataFrame, cost: float, capital: 
     trades = []
     for i in range(len(p)):
         px = p[i]
-        ok = ~np.isnan(px)
-        if pending is not None and ok[pending != 0].all() and ok[units != 0].all():
-            value = cash + float(np.nansum(units * px))
-            safe = np.where(ok, px, 1.0)
-            fee = 0.0
-            for _ in range(8):  # the fee is paid out of the same money, so solve for it
-                want = np.where(ok, pending * (value - fee) / safe, 0.0)
-                delta = want - units
-                traded = np.abs(delta) * np.where(ok, px, 0.0)
-                fee = float(traded.sum()) * cost
-            cash = value - fee - float(np.nansum(want * px))
+        if pending is not None:
+            units, cash, fee, delta, value = rebalance(cash, units, px, pending, cost)
             for j, c in enumerate(cols):
-                if traded[j] > 0.001 * value:  # fees on smaller adjustments are still charged
+                traded = abs(delta[j]) * px[j]
+                if traded > 0.001 * value:  # fees on smaller adjustments are still charged
                     trades.append({"time": prices.index[i], "asset": c,
                                    "side": "BUY" if delta[j] > 0 else "SELL",
                                    "units": float(abs(delta[j])), "price": float(px[j]),
-                                   "value": float(traded[j]), "fee": float(traded[j] * cost)})
-            units = want
+                                   "value": float(traded), "fee": float(traded * cost)})
             pending = None
-        equity[i] = cash + float(np.nansum(units * np.nan_to_num(px)))
+        equity[i] = cash + float((units * px).sum())
         if not np.isnan(t[i]).all():
             pending = np.nan_to_num(t[i])
-    last = np.nan_to_num(p[-1]) if len(p) else np.zeros(len(cols))
+    last = p[-1] if len(p) else np.zeros(len(cols))
     total = cash + float((units * last).sum())
     position = {c: float(units[j] * last[j] / total) for j, c in enumerate(cols)
                 if total > 0 and abs(units[j] * last[j] / total) > 0.005}
@@ -76,6 +79,35 @@ def bs_price(spot: float, strike: float, years: float, vol: float, kind: str) ->
     return call if kind == "call" else call - spot + strike
 
 
+def option_roll(kind, cash, shares, n, strike, s, v, stock_cost, haircut, days=21, otm=0.02):
+    """Settle the expiring option (if any) and sell the next one at spot s and volatility v.
+    Returns (cash, shares, n, strike, trade rows without timestamps)."""
+    rows = []
+    if n > 0:
+        pay = max(s - strike, 0.0) if kind == "call" else max(strike - s, 0.0)
+        cash -= n * pay
+        rows.append({"asset": f"SPY {kind} {strike:.2f}", "side": "EXPIRE", "units": n, "price": pay,
+                     "value": n * pay, "fee": 0.0})
+    value = cash + shares * s
+    if kind == "call":
+        fee = abs(value / s - shares) * s * stock_cost
+        shares, cash = (value - fee) / s, 0.0
+        n, strike = shares, s * (1 + otm)
+    else:
+        strike = s * (1 - otm)
+        n = value / strike
+    model = bs_price(s, strike, days / 252, v, kind)
+    cash += n * model * (1 - haircut)
+    rows.append({"asset": f"SPY {kind} {strike:.2f}", "side": "SELL", "units": n,
+                 "price": model * (1 - haircut), "value": n * model * (1 - haircut),
+                 "fee": n * model * haircut})
+    return cash, shares, n, strike, rows
+
+
+def option_value(kind, cash, shares, n, strike, s, v, days_left):
+    return cash + shares * s - n * bs_price(s, strike, days_left / 252, v, kind)
+
+
 def simulate_option_writer(spot: pd.Series, vol: pd.Series, kind: str, capital: float,
                            stock_cost: float, haircut: float, days: int = 21, otm: float = 0.02):
     """kind='call': hold the shares and sell a monthly call 2% above the price (covered call).
@@ -90,29 +122,11 @@ def simulate_option_writer(spot: pd.Series, vol: pd.Series, kind: str, capital: 
     left = 0
     for i in range(len(s)):
         if left == 0:
-            if n > 0:  # settle the expiring option
-                pay = max(s[i] - strike, 0.0) if kind == "call" else max(strike - s[i], 0.0)
-                cash -= n * pay
-                trades.append({"time": idx[i], "asset": f"SPY {kind} {strike:.2f}", "side": "EXPIRE",
-                               "units": n, "price": pay, "value": n * pay, "fee": 0.0})
-            value = cash + shares * s[i]
-            if kind == "call":
-                new_shares = value / s[i]
-                fee = abs(new_shares - shares) * s[i] * stock_cost
-                new_shares = (value - fee) / s[i]
-                shares, cash, n = new_shares, 0.0, new_shares
-                strike = s[i] * (1 + otm)
-            else:
-                strike = s[i] * (1 - otm)
-                n = value / strike
-            prem = bs_price(s[i], strike, days / 252, v[i], kind) * (1 - haircut)
-            fee_opt = bs_price(s[i], strike, days / 252, v[i], kind) * haircut * n
-            cash += n * prem
-            trades.append({"time": idx[i], "asset": f"SPY {kind} {strike:.2f}", "side": "SELL",
-                           "units": n, "price": prem, "value": n * prem, "fee": fee_opt})
+            cash, shares, n, strike, rows = option_roll(kind, cash, shares, n, strike, s[i], v[i],
+                                                        stock_cost, haircut, days, otm)
+            trades += [dict(r, time=idx[i]) for r in rows]
             left = days
-        liability = n * bs_price(s[i], strike, left / 252, v[i], kind)
-        equity[i] = cash + shares * s[i] - liability
+        equity[i] = option_value(kind, cash, shares, n, strike, s[i], v[i], left)
         left -= 1
     label = "shares + short call" if kind == "call" else "cash + short put"
     position = f"{label}, strike {strike:.2f}, {max(left, 0)} trading days left"
