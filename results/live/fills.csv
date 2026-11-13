@@ -1,0 +1,2 @@
+order_id,recorded_at,strategy_id,fill_bar,bar_closed_at,asset,side,units,price,value,fee,rules_hash,commit
+btc_intraday-00001,2026-11-13 04:28:42.904386,btc_intraday,2026-11-13 03:00:00,2026-11-13 04:00:00,BTC,BUY,0.0001600788713,62282.359,9.970090,0.029910,a1ef7b38b459,77aed6e2542816835f502ea7878fc3fa0bfdc04d

@@ -5,23 +5,22 @@
  "strategies": {
   "btc_intraday": {
    "benchmark_start": 63468.699,
-   "cash": 10.0,
+   "cash": 0.0,
+   "fills": 1,
    "last_target_bar": "2026-11-13 02:00:00",
    "order_seq": 1,
-   "pending": {
-    "instruction": {
+   "pending": null,
+   "start_bar": "2026-11-13 02:00:00",
+   "units": {
+    "BTC": 0.0001600788713029893
+   },
+   "view": {
+    "bar": "2026-11-13 03:00:00",
+    "benchmark_value": 9.813083,
+    "holding": {
      "BTC": 1.0
     },
-    "order_id": "btc_intraday-00001",
-    "recorded_at": "2026-11-13 03:54:01.306924"
-   },
-   "start_bar": "2026-11-13 02:00:00",
-   "units": {},
-   "view": {
-    "bar": "2026-11-13 02:00:00",
-    "benchmark_value": 10.0,
-    "holding": {},
-    "value": 10.0
+    "value": 9.97009
    }
   },
   "btc_trend": {
