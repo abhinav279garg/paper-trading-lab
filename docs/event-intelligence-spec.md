@@ -1,6 +1,6 @@
 # Event intelligence experiment: specification
 
-Version 1.0, 13 November 2026. Status: **specification only. Nothing in this document is built yet.**
+Version 1.1, 13 November 2026. Status: **Steps 0 and 1 authorised and built in `event_lab/`. No results existed when 1.1 was committed.**
 
 Paper only. No broker connection, no real orders, no AI spend until Gates 0 and 1 pass.
 The ten existing strategies in `lab/`, their rules and their records are not touched by this work.
@@ -137,4 +137,16 @@ A GO here means the effect was present in recent history. It is not proof of a t
 
 ## 12. Change log
 
+- 1.1 (committed before any result existed). Operational definitions needed to run Steps 0 and 1:
+  - **Link discovery.** SEC full-text search for fixed phrases ("X accounted for", "sales to X", and similar) over a fixed list of about 140 large listed customers, followed by the word-for-word check in section 3. The structured-data route was not attempted in this run. The customer list was written today, which is a mild hindsight risk.
+  - **Link dates.** A link is usable from the day after the annual report's filing date (at or after acceptance) and ends the day after the supplier's next annual report, or after 15 months if there is none.
+  - **Acceptance times** are read as New York time, the later of the two possible readings.
+  - **Size** means median daily traded value over the previous 60 trading days: large above $50M, mid $5M to $50M, small below. Decoys are matched on this within the same sector ETF group, drawn from other disclosed suppliers never linked to that customer.
+  - **Short selling.** A short is not allowed when the share price is under $5 or daily traded value under $1M. Shorts pay a borrowing fee of 1%, 3% or 10% a year by size, for the days held. These are assumptions, not broker quotes.
+  - **Untradable names.** Daily traded value under $100,000, or no entry price at T2. A name that stops trading during the holding period is closed at its last price.
+  - **Which suppliers.** When more than 5 are valid, the 5 with the largest disclosed revenue share.
+  - **Gate 0 pass rule.** A row passes when both its median over 2018–2025 and its 2025 value meet the level. "Events" counts qualifying events that produce at least one supplier and decoy pair.
+  - **Gate 1, stricter.** GO additionally requires arm A itself to be positive against its sector after costs, because costs cancel out of the A-minus-placebo difference.
+  - **Uncertainty.** 90% interval from resampling whole clusters 10,000 times with a fixed seed.
+  - **Freeze.** The holdout runs only when the file `event_lab/FROZEN` holds the hash of the current `event_lab/*.py`, and only once.
 - 1.0: first version. Incorporates the timing correction (trigger fully observed before the signal is recorded), the expanded feasibility gate, matched candidate pools, and a pre-registered holdout.
