@@ -1,0 +1,11 @@
+order_id,recorded_at,strategy_id,signal_bar,instruction,supersedes,rules_hash,commit
+btc_trend-00001,2026-11-13 03:54:01.306924,btc_trend,2026-09-07 00:00:00,"{""BTC"": 1.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+eth_breakout-00001,2026-11-13 03:54:01.306924,eth_breakout,2026-10-07 00:00:00,"{""ETH"": 0.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+btc_intraday-00001,2026-11-13 03:54:01.306924,btc_intraday,2026-11-13 02:00:00,"{""BTC"": 1.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+spy_hold-00001,2026-11-13 03:54:01.306924,spy_hold,2016-01-04 00:00:00,"{""SPY"": 1.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+etf_rotation-00001,2026-11-13 03:54:01.306924,etf_rotation,2026-11-02 00:00:00,"{""EFA"": 0.5, ""GLD"": 0.0, ""QQQ"": 0.0, ""SPY"": 0.5, ""TLT"": 0.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+stock_momentum-00001,2026-11-13 03:54:01.306924,stock_momentum,2026-11-02 00:00:00,"{""AAPL"": 0.3333333333333333, ""AMZN"": 0.0, ""BAC"": 0.0, ""BRK"": 0.0, ""GOOGL"": 0.0, ""JNJ"": 0.3333333333333333, ""JPM"": 0.0, ""META"": 0.0, ""MSFT"": 0.3333333333333333, ""WFC"": 0.0, ""WMT"": 0.0, ""XOM"": 0.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+spy_rsi2-00001,2026-11-13 03:54:01.306924,spy_rsi2,2026-09-11 00:00:00,"{""SPY"": 0.0}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+futures_trend-00001,2026-11-13 03:54:01.306924,futures_trend,2026-11-11 00:00:00,"{""BZ"": 0.3333333333333333, ""ES"": 0.3333333333333333, ""GC"": -0.3333333333333333}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+covered_call-00001,2026-11-13 03:54:01.306924,covered_call,2026-11-12 00:00:00,"{""action"": ""sell 21-day call, 2% out of the money""}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
+cash_secured_put-00001,2026-11-13 03:54:01.306924,cash_secured_put,2026-11-12 00:00:00,"{""action"": ""sell 21-day put, 2% out of the money""}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
