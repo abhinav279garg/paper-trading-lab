@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: event-lab
@@ -18,7 +19,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 345
+    timeout-minutes: 60
     env:
       SEC_CONTACT: ${{ secrets.SEC_CONTACT }}
     steps:
@@ -51,3 +52,12 @@ jobs:
           git stash -u || true
           git pull --rebase origin main
           git push
+      - name: Continue in a fresh run until finished
+        if: steps.check.outputs.go == 'yes' && success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if grep -q '"final": true' results/event_lab/STATUS.json 2>/dev/null; then echo "finished"; exit 0; fi
+          if [ -f results/event_lab/error.txt ]; then echo "stopped on an error"; exit 0; fi
+          if grep -q 'waiting for the code freeze' results/event_lab/STATUS.json 2>/dev/null; then echo "waiting for freeze"; exit 0; fi
+          gh workflow run event-lab.yml --repo "$GITHUB_REPOSITORY" --ref main

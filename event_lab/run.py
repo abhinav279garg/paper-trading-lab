@@ -285,7 +285,10 @@ def main():
         os.remove(os.path.join(OUT, "error.txt"))
     from .sec import Sec
     sec = Sec()
-    deadline = time.time() + int(os.environ.get("EVENT_LAB_MINUTES", "300")) * 60
+    minutes = int(os.environ.get("EVENT_LAB_MINUTES", "25"))
+    if not os.path.exists(links.HITS):
+        minutes = min(minutes, 6)          # a short first run, so problems show up quickly
+    deadline = time.time() + minutes * 60
     stage = "discovering reports"
     done = links.discover(sec, deadline) and (stage := "verifying links") and links.verify(sec, deadline)
     link_rows = links._read(links.LINKS)
