@@ -10,3 +10,4 @@ futures_trend-00001,2026-11-13 03:54:01.306924,futures_trend,2026-11-11 00:00:00
 covered_call-00001,2026-11-13 03:54:01.306924,covered_call,2026-11-12 00:00:00,"{""action"": ""sell 21-day call, 2% out of the money""}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
 cash_secured_put-00001,2026-11-13 03:54:01.306924,cash_secured_put,2026-11-12 00:00:00,"{""action"": ""sell 21-day put, 2% out of the money""}",,a1ef7b38b459,da814c3bc112db9c2695dbc6b29c245439dd2e6c
 btc_intraday-00002,2026-11-13 19:35:55.013641,btc_intraday,2026-11-13 14:00:00,"{""BTC"": 0.0}",,a1ef7b38b459,33b20037a89b88723328653dc16773344f87d95e
+btc_intraday-00003,2026-11-14 06:56:13.083105,btc_intraday,2026-11-14 02:00:00,"{""BTC"": 1.0}",,a1ef7b38b459,89308316b14ae41eaf08a3055fc731f488c98269

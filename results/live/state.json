@@ -7,14 +7,20 @@
    "benchmark_start": 63468.699,
    "cash": 9.995425007808684,
    "fills": 2,
-   "last_target_bar": "2026-11-13 14:00:00",
-   "order_seq": 2,
-   "pending": null,
+   "last_target_bar": "2026-11-14 02:00:00",
+   "order_seq": 3,
+   "pending": {
+    "instruction": {
+     "BTC": 1.0
+    },
+    "order_id": "btc_intraday-00003",
+    "recorded_at": "2026-11-14 06:56:13.083105"
+   },
    "start_bar": "2026-11-13 02:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-14 01:00:00",
-    "benchmark_value": 9.76118,
+    "bar": "2026-11-14 05:00:00",
+    "benchmark_value": 9.608346,
     "holding": {},
     "value": 9.995425
    }
@@ -133,11 +139,11 @@
     "bar": "2026-11-13 00:00:00",
     "benchmark_value": 10.004253,
     "holding": {
-     "BZ": 0.3333,
-     "ES": 0.3333,
-     "GC": -0.3333
+     "BZ": 0.3324,
+     "ES": 0.3342,
+     "GC": -0.3331
     },
-    "value": 9.995002
+    "value": 9.997488
    }
   },
   "spy_hold": {
@@ -177,34 +183,26 @@
   },
   "stock_momentum": {
    "benchmark_start": 682.3851755714182,
-   "cash": 10.0,
+   "cash": 0.0,
+   "fills": 1,
    "last_target_bar": "2026-11-02 00:00:00",
    "order_seq": 1,
-   "pending": {
-    "instruction": {
-     "AAPL": 0.3333333333333333,
-     "AMZN": 0.0,
-     "BAC": 0.0,
-     "BRK": 0.0,
-     "GOOGL": 0.0,
-     "JNJ": 0.3333333333333333,
-     "JPM": 0.0,
-     "META": 0.0,
-     "MSFT": 0.3333333333333333,
-     "WFC": 0.0,
-     "WMT": 0.0,
-     "XOM": 0.0
-    },
-    "order_id": "stock_momentum-00001",
-    "recorded_at": "2026-11-13 03:54:01.306924"
-   },
+   "pending": null,
    "start_bar": "2026-11-12 00:00:00",
-   "units": {},
+   "units": {
+    "AAPL": 0.010328459538328456,
+    "JNJ": 0.01287741130260815,
+    "MSFT": 0.007023975490036418
+   },
    "view": {
-    "bar": "2026-11-12 00:00:00",
+    "bar": "2026-11-13 00:00:00",
     "benchmark_value": 10.004253,
-    "holding": {},
-    "value": 10.0
+    "holding": {
+     "AAPL": 0.3333,
+     "JNJ": 0.3333,
+     "MSFT": 0.3333
+    },
+    "value": 9.99001
    }
   }
  }
