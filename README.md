@@ -2,18 +2,18 @@
 
 **Simulated money only.** Ten rule-based strategies, each starting with an imaginary €10. No broker is connected and no real order is ever placed. This is an experiment, not investment advice.
 
-_Last updated: 2026-11-14 19:52 UTC. Updated automatically by GitHub Actions._
+_Last updated: 2026-11-15 01:57 UTC. Updated automatically by GitHub Actions._
 
 ## Live paper portfolio (record started 2026-11-13 03:54 UTC)
 
-**Strategies: €100.00 → €99.62 (-0.4%)**  
-**Just holding each benchmark: €100.00 → €98.56 (-1.4%)**
+**Strategies: €100.00 → €99.13 (-0.9%)**  
+**Just holding each benchmark: €100.00 → €97.99 (-2.0%)**
 
 | # | Strategy | €10 is now | Hold instead | Holding now | Waiting order | Fills |
 |---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | €9.97 (-0.3%) | €9.59 BTC | BTC +100% |  | 1 |
-| 2 | Ether 20-day breakout | €10.00 (+0.0%) | €9.56 ETH | cash |  | 0 |
-| 3 | Bitcoin intraday mean reversion (hourly) | €9.70 (-3.0%) | €9.37 BTC | BTC +100% | yes | 3 |
+| 1 | Bitcoin trend following (50/200-day) | €9.78 (-2.2%) | €9.41 BTC | BTC +100% |  | 1 |
+| 2 | Ether 20-day breakout | €10.00 (+0.0%) | €9.47 ETH | cash |  | 0 |
+| 3 | Bitcoin intraday mean reversion (hourly) | €9.40 (-6.0%) | €9.08 BTC | BTC +100% |  | 3 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | €9.99 (-0.1%) | €10.00 SPY | SPY +100% |  | 1 |
 | 5 | ETF rotation, top 2 of 5, monthly | €9.99 (-0.1%) | €10.00 SPY | EFA +50%, SPY +50% |  | 1 |
 | 6 | Stock momentum, top 3 of 12, monthly | €9.99 (-0.1%) | €10.00 SPY | AAPL +33%, JNJ +33%, MSFT +33% |  | 1 |
@@ -25,14 +25,6 @@ _Last updated: 2026-11-14 19:52 UTC. Updated automatically by GitHub Actions._
 Risk-adjusted comparison (Sharpe, worst drop) appears once 30 daily values are recorded (1 so far).
 
 Each strategy started in cash. "Hold instead" is €10 put into that strategy's benchmark at the same moment. Judge a strategy by its number of fills and its result against that benchmark, not by elapsed time alone: a monthly rule produces about 12 decisions a year.
-
-### Orders waiting to be filled
-
-Recorded now, filled at the close of the next finished price bar.
-
-| Order | Recorded (UTC) | Instruction |
-|---|---|---|
-| btc_intraday-00004 | 2026-11-14 19:52 | BTC +100% |
 
 ### Latest fills
 
@@ -70,9 +62,9 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 
 | # | Strategy | Period | Total | Per year | Worst drop | Sharpe | Hold: total | Hold: worst drop | Hold: Sharpe | Trades | Fees per €10 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-13 | +276.5% | +16.1% | -63.3% | 0.55 | +448.3% BTC | -80.4% | 0.62 | 18 | €1.35 |
-| 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-13 | +2865.7% | +46.6% | -51.5% | 0.99 | +171.3% ETH | -93.5% | 0.55 | 127 | €62.24 |
-| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-14 | -89.1% | -66.9% | -89.2% | -4.72 | -28.4% BTC | -52.6% | -0.16 | 711 | €9.61 |
+| 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-14 | +269.3% | +15.9% | -63.3% | 0.55 | +437.9% BTC | -80.4% | 0.62 | 18 | €1.35 |
+| 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-14 | +2865.7% | +46.6% | -51.5% | 0.99 | +168.7% ETH | -93.5% | 0.55 | 127 | €62.24 |
+| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-15 | -89.4% | -67.4% | -89.5% | -4.78 | -30.6% BTC | -52.6% | -0.19 | 711 | €9.61 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | 2018-01-02 → 2026-11-13 | +248.4% | +15.1% | -33.1% | 0.80 | +248.4% SPY | -33.1% | 0.80 | 0 | €0.00 |
 | 5 | ETF rotation, top 2 of 5, monthly | 2018-01-02 → 2026-11-13 | +69.2% | +6.1% | -34.0% | 0.41 | +248.4% SPY | -33.1% | 0.80 | 228 | €0.49 |
 | 6 | Stock momentum, top 3 of 12, monthly | 2018-01-02 → 2026-11-13 | +494.4% | +22.3% | -29.9% | 0.93 | +248.4% SPY | -33.1% | 0.80 | 398 | €2.05 |
@@ -86,8 +78,8 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 | Portfolio | Per year | Worst drop | Volatility | Sharpe |
 |---|---|---|---|---|
 | The strategies | +21.4% | -34.4% | 26.3% | 0.87 |
-| The strategies without Ether breakout | +11.9% | -24.6% | 15.9% | 0.78 |
-| Each strategy's own benchmark, held | +15.3% | -41.2% | 26.3% | 0.67 |
+| The strategies without Ether breakout | +11.8% | -24.6% | 15.9% | 0.78 |
+| Each strategy's own benchmark, held | +15.2% | -41.2% | 26.3% | 0.67 |
 | Everything in the S&P 500 ETF | +15.1% | -33.1% | 20.1% | 0.80 |
 
 The combined result leans almost entirely on one strategy. Without Ether breakout the rest did not beat simply holding the S&P 500 ETF on a risk-adjusted basis.
@@ -98,8 +90,8 @@ This is **not** an out-of-sample test: both halves were already known when the r
 
 | # | Strategy | Before 2022: strategy | hold | From 2022: strategy | hold | Beat hold in both? |
 |---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | +153.8% | +258.0% | +44.1% | +48.7% | no |
-| 2 | Ether 20-day breakout | +1957.9% | +403.2% | +44.1% | -47.3% | yes |
+| 1 | Bitcoin trend following (50/200-day) | +153.8% | +258.0% | +41.3% | +45.9% | no |
+| 2 | Ether 20-day breakout | +1957.9% | +403.2% | +44.1% | -47.8% | yes |
 | 3 | Bitcoin intraday mean reversion (hourly) | n/a | n/a | n/a | n/a | history too short |
 | 4 | S&P 500 ETF buy and hold (benchmark) | +100.9% | +100.9% | +73.2% | +73.2% | is the benchmark |
 | 5 | ETF rotation, top 2 of 5, monthly | +14.0% | +100.9% | +50.2% | +73.2% | no |
