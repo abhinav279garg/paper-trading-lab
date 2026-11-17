@@ -7,14 +7,20 @@
    "benchmark_start": 63468.699,
    "cash": 9.526136788381187,
    "fills": 4,
-   "last_target_bar": "2026-11-16 14:00:00",
-   "order_seq": 6,
-   "pending": null,
+   "last_target_bar": "2026-11-17 15:00:00",
+   "order_seq": 7,
+   "pending": {
+    "instruction": {
+     "BTC": 1.0
+    },
+    "order_id": "btc_intraday-00007",
+    "recorded_at": "2026-11-17 20:47:36.630364"
+   },
    "start_bar": "2026-11-13 02:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-17 07:00:00",
-    "benchmark_value": 9.270921,
+    "bar": "2026-11-17 19:00:00",
+    "benchmark_value": 9.116217,
     "holding": {},
     "value": 9.526137
    }
