@@ -13,8 +13,8 @@
    "start_bar": "2026-11-13 02:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-17 03:00:00",
-    "benchmark_value": 9.30484,
+    "bar": "2026-11-17 07:00:00",
+    "benchmark_value": 9.270921,
     "holding": {},
     "value": 9.526137
    }
@@ -32,11 +32,11 @@
    },
    "view": {
     "bar": "2026-11-16 00:00:00",
-    "benchmark_value": 9.021278,
+    "benchmark_value": 9.066342,
     "holding": {
      "BTC": 1.0
     },
-    "value": 9.380746
+    "value": 9.427607
    }
   },
   "cash_secured_put": {
@@ -111,7 +111,7 @@
    "units": {},
    "view": {
     "bar": "2026-11-16 00:00:00",
-    "benchmark_value": 9.027165,
+    "benchmark_value": 9.061129,
     "holding": {},
     "value": 10.0
    }
@@ -141,11 +141,11 @@
     "bar": "2026-11-16 00:00:00",
     "benchmark_value": 9.835538,
     "holding": {
-     "BZ": 0.3245,
-     "ES": 0.3349,
-     "GC": -0.3391
+     "BZ": 0.3261,
+     "ES": 0.3335,
+     "GC": -0.3359
     },
-    "value": 9.803371
+    "value": 9.851977
    }
   },
   "spy_hold": {
