@@ -7,14 +7,20 @@
    "benchmark_start": 63468.699,
    "cash": 9.743385059732343,
    "fills": 13,
-   "last_target_bar": "2026-11-21 12:00:00",
-   "order_seq": 15,
-   "pending": null,
+   "last_target_bar": "2026-11-25 07:00:00",
+   "order_seq": 16,
+   "pending": {
+    "instruction": {
+     "BTC": 1.0
+    },
+    "order_id": "btc_intraday-00016",
+    "recorded_at": "2026-11-25 09:02:03.619586"
+   },
    "start_bar": "2026-11-13 02:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-25 03:00:00",
-    "benchmark_value": 8.542097,
+    "bar": "2026-11-25 08:00:00",
+    "benchmark_value": 8.546648,
     "holding": {},
     "value": 9.743385
    }
@@ -32,11 +38,11 @@
    },
    "view": {
     "bar": "2026-11-24 00:00:00",
-    "benchmark_value": 8.424229,
+    "benchmark_value": 8.380164,
     "holding": {
      "BTC": 1.0
     },
-    "value": 8.759907
+    "value": 8.714086
    }
   },
   "cash_secured_put": {
@@ -111,7 +117,7 @@
    "units": {},
    "view": {
     "bar": "2026-11-24 00:00:00",
-    "benchmark_value": 8.442884,
+    "benchmark_value": 8.383886,
     "holding": {},
     "value": 10.0
    }
@@ -133,11 +139,11 @@
     "bar": "2026-11-24 00:00:00",
     "benchmark_value": 9.656445,
     "holding": {
-     "BZ": -0.3266,
-     "ES": -0.3353,
-     "GC": -0.3373
+     "BZ": -0.3476,
+     "ES": -0.3441,
+     "GC": -0.3451
     },
-    "value": 10.379812
+    "value": 10.188007
    }
   },
   "spy_hold": {

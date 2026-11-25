@@ -2,29 +2,37 @@
 
 **Simulated money only.** Ten rule-based strategies, each starting with an imaginary €10. No broker is connected and no real order is ever placed. This is an experiment, not investment advice.
 
-_Last updated: 2026-11-25 04:54 UTC. Updated automatically by GitHub Actions._
+_Last updated: 2026-11-25 09:02 UTC. Updated automatically by GitHub Actions._
 
 ## Live paper portfolio (record started 2026-11-13 03:54 UTC)
 
-**Strategies: €100.00 → €97.55 (-2.5%)**  
-**Just holding each benchmark: €100.00 → €93.00 (-7.0%)**
+**Strategies: €100.00 → €97.31 (-2.7%)**  
+**Just holding each benchmark: €100.00 → €92.91 (-7.1%)**
 
 | # | Strategy | €10 is now | Hold instead | Holding now | Waiting order | Fills |
 |---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | €8.76 (-12.4%) | €8.42 BTC | BTC +100% |  | 1 |
-| 2 | Ether 20-day breakout | €10.00 (+0.0%) | €8.44 ETH | cash |  | 0 |
-| 3 | Bitcoin intraday mean reversion (hourly) | €9.74 (-2.6%) | €8.54 BTC | cash |  | 13 |
+| 1 | Bitcoin trend following (50/200-day) | €8.71 (-12.9%) | €8.38 BTC | BTC +100% |  | 1 |
+| 2 | Ether 20-day breakout | €10.00 (+0.0%) | €8.38 ETH | cash |  | 0 |
+| 3 | Bitcoin intraday mean reversion (hourly) | €9.74 (-2.6%) | €8.55 BTC | cash | yes | 13 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | €9.64 (-3.6%) | €9.66 SPY | SPY +100% |  | 1 |
 | 5 | ETF rotation, top 2 of 5, monthly | €9.62 (-3.8%) | €9.66 SPY | EFA +50%, SPY +50% |  | 1 |
 | 6 | Stock momentum, top 3 of 12, monthly | €9.81 (-1.9%) | €9.66 SPY | AAPL +34%, JNJ +33%, MSFT +33% |  | 1 |
 | 7 | Short-term mean reversion on S&P 500 ETF | €10.08 (+0.8%) | €9.66 SPY | cash |  | 2 |
-| 8 | Futures trend, S&P / gold / oil, long-short | €10.38 (+3.8%) | €9.66 SPY | BZ -33%, ES -34%, GC -34% |  | 4 |
+| 8 | Futures trend, S&P / gold / oil, long-short | €10.19 (+1.9%) | €9.66 SPY | BZ -35%, ES -34%, GC -35% |  | 4 |
 | 9 | Covered call on S&P 500 ETF (model-priced) | €9.70 (-3.0%) | €9.66 SPY | shares + short call, strike 696.33, 13 trading days left |  | 1 |
 | 10 | Cash-secured put on S&P 500 ETF (model-priced) | €9.80 (-2.0%) | €9.66 SPY | cash + short put, strike 669.02, 13 trading days left |  | 1 |
 
 Risk-adjusted comparison (Sharpe, worst drop) appears once 30 daily values are recorded (8 so far).
 
 Each strategy started in cash. "Hold instead" is €10 put into that strategy's benchmark at the same moment. Judge a strategy by its number of fills and its result against that benchmark, not by elapsed time alone: a monthly rule produces about 12 decisions a year.
+
+### Orders waiting to be filled
+
+Recorded now, filled at the close of the next finished price bar.
+
+| Order | Recorded (UTC) | Instruction |
+|---|---|---|
+| btc_intraday-00016 | 2026-11-25 09:02 | BTC +100% |
 
 ### Latest fills
 
@@ -67,14 +75,14 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 
 | # | Strategy | Period | Total | Per year | Worst drop | Sharpe | Hold: total | Hold: worst drop | Hold: Sharpe | Trades | Fees per €10 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-24 | +230.8% | +14.4% | -63.3% | 0.52 | +381.8% BTC | -80.4% | 0.60 | 18 | €1.35 |
-| 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-24 | +2865.7% | +46.4% | -51.5% | 0.99 | +139.6% ETH | -93.5% | 0.54 | 127 | €62.24 |
-| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-25 | -88.9% | -66.1% | -89.8% | -4.48 | -34.7% BTC | -52.8% | -0.25 | 724 | €9.65 |
+| 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-24 | +229.0% | +14.3% | -63.3% | 0.52 | +379.3% BTC | -80.4% | 0.60 | 18 | €1.35 |
+| 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-24 | +2865.7% | +46.4% | -51.5% | 0.99 | +137.9% ETH | -93.5% | 0.53 | 127 | €62.24 |
+| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-25 | -88.9% | -66.1% | -89.8% | -4.49 | -34.7% BTC | -52.8% | -0.24 | 725 | €9.65 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | 2018-01-02 → 2026-11-24 | +236.3% | +14.6% | -33.1% | 0.78 | +236.3% SPY | -33.1% | 0.78 | 0 | €0.00 |
 | 5 | ETF rotation, top 2 of 5, monthly | 2018-01-02 → 2026-11-24 | +63.0% | +5.6% | -34.0% | 0.39 | +236.3% SPY | -33.1% | 0.78 | 228 | €0.49 |
 | 6 | Stock momentum, top 3 of 12, monthly | 2018-01-02 → 2026-11-24 | +485.4% | +22.0% | -29.9% | 0.92 | +236.3% SPY | -33.1% | 0.78 | 398 | €2.05 |
 | 7 | Short-term mean reversion on S&P 500 ETF | 2018-01-02 → 2026-11-24 | +17.3% | +1.8% | -12.2% | 0.31 | +236.3% SPY | -33.1% | 0.78 | 130 | €1.42 |
-| 8 | Futures trend, S&P / gold / oil, long-short | 2018-01-02 → 2026-11-24 | -37.4% | -5.1% | -47.2% | -0.21 | +236.3% SPY | -33.1% | 0.78 | 1060 | €1.03 |
+| 8 | Futures trend, S&P / gold / oil, long-short | 2018-01-02 → 2026-11-24 | -38.5% | -5.3% | -47.2% | -0.22 | +236.3% SPY | -33.1% | 0.78 | 1060 | €1.03 |
 | 9 | Covered call on S&P 500 ETF (model-priced) | 2018-01-02 → 2026-11-24 | +194.9% | +12.9% | -28.8% | 0.82 | +236.3% SPY | -33.1% | 0.78 | 214 | €1.03 |
 | 10 | Cash-secured put on S&P 500 ETF (model-priced) | 2018-01-02 → 2026-11-24 | +112.7% | +8.9% | -24.2% | 0.73 | +236.3% SPY | -33.1% | 0.78 | 214 | €1.11 |
 
@@ -84,7 +92,7 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 |---|---|---|---|---|
 | The strategies | +21.1% | -34.4% | 26.2% | 0.86 |
 | The strategies without Ether breakout | +11.3% | -24.6% | 15.9% | 0.75 |
-| Each strategy's own benchmark, held | +14.5% | -41.2% | 26.4% | 0.65 |
+| Each strategy's own benchmark, held | +14.5% | -41.2% | 26.4% | 0.64 |
 | Everything in the S&P 500 ETF | +14.6% | -33.1% | 20.2% | 0.78 |
 
 The combined result leans almost entirely on one strategy. Without Ether breakout the rest did not beat simply holding the S&P 500 ETF on a risk-adjusted basis.
@@ -95,14 +103,14 @@ This is **not** an out-of-sample test: both halves were already known when the r
 
 | # | Strategy | Before 2022: strategy | hold | From 2022: strategy | hold | Beat hold in both? |
 |---|---|---|---|---|---|---|
-| 1 | Bitcoin trend following (50/200-day) | +153.8% | +258.0% | +26.6% | +30.7% | no |
-| 2 | Ether 20-day breakout | +1957.9% | +403.2% | +44.1% | -53.5% | yes |
+| 1 | Bitcoin trend following (50/200-day) | +153.8% | +258.0% | +25.9% | +30.0% | no |
+| 2 | Ether 20-day breakout | +1957.9% | +403.2% | +44.1% | -53.8% | yes |
 | 3 | Bitcoin intraday mean reversion (hourly) | n/a | n/a | n/a | n/a | history too short |
 | 4 | S&P 500 ETF buy and hold (benchmark) | +100.9% | +100.9% | +67.1% | +67.1% | is the benchmark |
 | 5 | ETF rotation, top 2 of 5, monthly | +14.0% | +100.9% | +44.7% | +67.1% | no |
 | 6 | Stock momentum, top 3 of 12, monthly | +156.4% | +100.9% | +127.6% | +67.1% | yes |
 | 7 | Short-term mean reversion on S&P 500 ETF | +10.9% | +100.9% | +5.8% | +67.1% | no |
-| 8 | Futures trend, S&P / gold / oil, long-short | -19.7% | +100.9% | -21.9% | +67.1% | no |
+| 8 | Futures trend, S&P / gold / oil, long-short | -19.7% | +100.9% | -23.3% | +67.1% | no |
 | 9 | Covered call on S&P 500 ETF (model-priced) | +81.6% | +100.9% | +62.4% | +67.1% | no |
 | 10 | Cash-secured put on S&P 500 ETF (model-priced) | +47.9% | +100.9% | +43.8% | +67.1% | no |
 
