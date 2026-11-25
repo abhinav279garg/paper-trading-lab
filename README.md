@@ -2,18 +2,18 @@
 
 **Simulated money only.** Ten rule-based strategies, each starting with an imaginary €10. No broker is connected and no real order is ever placed. This is an experiment, not investment advice.
 
-_Last updated: 2026-11-25 09:02 UTC. Updated automatically by GitHub Actions._
+_Last updated: 2026-11-25 12:38 UTC. Updated automatically by GitHub Actions._
 
 ## Live paper portfolio (record started 2026-11-13 03:54 UTC)
 
-**Strategies: €100.00 → €97.31 (-2.7%)**  
-**Just holding each benchmark: €100.00 → €92.91 (-7.1%)**
+**Strategies: €100.00 → €97.21 (-2.8%)**  
+**Just holding each benchmark: €100.00 → €92.80 (-7.2%)**
 
 | # | Strategy | €10 is now | Hold instead | Holding now | Waiting order | Fills |
 |---|---|---|---|---|---|---|
 | 1 | Bitcoin trend following (50/200-day) | €8.71 (-12.9%) | €8.38 BTC | BTC +100% |  | 1 |
 | 2 | Ether 20-day breakout | €10.00 (+0.0%) | €8.38 ETH | cash |  | 0 |
-| 3 | Bitcoin intraday mean reversion (hourly) | €9.74 (-2.6%) | €8.55 BTC | cash | yes | 13 |
+| 3 | Bitcoin intraday mean reversion (hourly) | €9.65 (-3.5%) | €8.44 BTC | BTC +100% |  | 14 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | €9.64 (-3.6%) | €9.66 SPY | SPY +100% |  | 1 |
 | 5 | ETF rotation, top 2 of 5, monthly | €9.62 (-3.8%) | €9.66 SPY | EFA +50%, SPY +50% |  | 1 |
 | 6 | Stock momentum, top 3 of 12, monthly | €9.81 (-1.9%) | €9.66 SPY | AAPL +34%, JNJ +33%, MSFT +33% |  | 1 |
@@ -26,18 +26,11 @@ Risk-adjusted comparison (Sharpe, worst drop) appears once 30 daily values are r
 
 Each strategy started in cash. "Hold instead" is €10 put into that strategy's benchmark at the same moment. Judge a strategy by its number of fills and its result against that benchmark, not by elapsed time alone: a monthly rule produces about 12 decisions a year.
 
-### Orders waiting to be filled
-
-Recorded now, filled at the close of the next finished price bar.
-
-| Order | Recorded (UTC) | Instruction |
-|---|---|---|
-| btc_intraday-00016 | 2026-11-25 09:02 | BTC +100% |
-
 ### Latest fills
 
 | Order | Bar closed (UTC) | Action | Asset | Price | Value | Fee |
 |---|---|---|---|---|---|---|
+| btc_intraday-00016 | 2026-11-25 10:00 | BUY | BTC | 53,928.9610 | €9.71 | €0.0291 |
 | spy_rsi2-00003 | 2026-11-24 21:30 | SELL | SPY | 658.9415 | €10.09 | €0.0101 |
 | btc_intraday-00015 | 2026-11-21 18:00 | SELL | BTC | 54,803.2190 | €9.77 | €0.0293 |
 | btc_intraday-00014 | 2026-11-21 08:00 | SELL | BTC | 52,923.6290 | €0.00 | €0.0000 |
@@ -57,7 +50,6 @@ Recorded now, filled at the close of the next finished price bar.
 | futures_trend-00002 | 2026-11-17 21:30 | SELL | GC | 3,448.8371 | €0.03 | €0.0000 |
 | futures_trend-00002 | 2026-11-17 21:30 | BUY | ES | 6,709.7343 | €0.03 | €0.0000 |
 | btc_intraday-00008 | 2026-11-18 03:00 | SELL | BTC | 58,480.8400 | €9.56 | €0.0287 |
-| btc_intraday-00007 | 2026-11-17 21:00 | BUY | BTC | 58,080.0780 | €9.50 | €0.0285 |
 
 ## How the live record is kept honest
 
@@ -77,7 +69,7 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-24 | +229.0% | +14.3% | -63.3% | 0.52 | +379.3% BTC | -80.4% | 0.60 | 18 | €1.35 |
 | 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-24 | +2865.7% | +46.4% | -51.5% | 0.99 | +137.9% ETH | -93.5% | 0.53 | 127 | €62.24 |
-| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-25 | -88.9% | -66.1% | -89.8% | -4.49 | -34.7% BTC | -52.8% | -0.24 | 725 | €9.65 |
+| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-25 | -89.1% | -66.3% | -89.8% | -4.51 | -35.5% BTC | -52.8% | -0.26 | 725 | €9.65 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | 2018-01-02 → 2026-11-24 | +236.3% | +14.6% | -33.1% | 0.78 | +236.3% SPY | -33.1% | 0.78 | 0 | €0.00 |
 | 5 | ETF rotation, top 2 of 5, monthly | 2018-01-02 → 2026-11-24 | +63.0% | +5.6% | -34.0% | 0.39 | +236.3% SPY | -33.1% | 0.78 | 228 | €0.49 |
 | 6 | Stock momentum, top 3 of 12, monthly | 2018-01-02 → 2026-11-24 | +485.4% | +22.0% | -29.9% | 0.92 | +236.3% SPY | -33.1% | 0.78 | 398 | €2.05 |
