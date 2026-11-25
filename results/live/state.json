@@ -13,8 +13,8 @@
    "start_bar": "2026-11-13 02:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-24 09:00:00",
-    "benchmark_value": 8.639407,
+    "bar": "2026-11-25 03:00:00",
+    "benchmark_value": 8.542097,
     "holding": {},
     "value": 9.743385
    }
@@ -31,20 +31,20 @@
     "BTC": 0.00015987828402286026
    },
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 8.628104,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 8.424229,
     "holding": {
      "BTC": 1.0
     },
-    "value": 8.971906
+    "value": 8.759907
    }
   },
   "cash_secured_put": {
    "benchmark_start": 682.3851755714182,
    "cash": 10.130208933343019,
    "fills": 1,
-   "last_bar": "2026-11-23 00:00:00",
-   "left": 14,
+   "last_bar": "2026-11-24 00:00:00",
+   "left": 13,
    "n": 0.014947193400737415,
    "order_seq": 1,
    "pending": null,
@@ -53,18 +53,18 @@
    "strike": 669.0219181553276,
    "units": {},
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
-    "holding": "cash + short put, strike 669.02, 14 trading days left",
-    "value": 9.785482
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
+    "holding": "cash + short put, strike 669.02, 13 trading days left",
+    "value": 9.801608
    }
   },
   "covered_call": {
    "benchmark_start": 682.3851755714182,
    "cash": 0.10177374940322641,
    "fills": 1,
-   "last_bar": "2026-11-23 00:00:00",
-   "left": 14,
+   "last_bar": "2026-11-24 00:00:00",
+   "left": 13,
    "n": 0.014633601283189945,
    "order_seq": 1,
    "pending": null,
@@ -73,10 +73,10 @@
    "strike": 696.328935222892,
    "units": {},
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
-    "holding": "shares + short call, strike 696.33, 14 trading days left",
-    "value": 9.691405
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
+    "holding": "shares + short call, strike 696.33, 13 trading days left",
+    "value": 9.704465
    }
   },
   "etf_rotation": {
@@ -92,13 +92,13 @@
     "SPY": 0.00731680795840293
    },
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
     "holding": {
-     "EFA": 0.4975,
-     "SPY": 0.5025
+     "EFA": 0.4991,
+     "SPY": 0.5009
     },
-    "value": 9.586458
+    "value": 9.624461
    }
   },
   "eth_breakout": {
@@ -110,8 +110,8 @@
    "start_bar": "2026-11-12 00:00:00",
    "units": {},
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 8.582025,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 8.442884,
     "holding": {},
     "value": 10.0
    }
@@ -130,14 +130,14 @@
     "GC": -0.0010767256732005556
    },
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
     "holding": {
-     "BZ": -0.3368,
-     "ES": -0.3428,
-     "GC": -0.3506
+     "BZ": -0.3266,
+     "ES": -0.3353,
+     "GC": -0.3373
     },
-    "value": 10.221538
+    "value": 10.379812
    }
   },
   "spy_hold": {
@@ -152,38 +152,28 @@
     "SPY": 0.01463361591680586
    },
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
     "holding": {
      "SPY": 1.0
     },
-    "value": 9.633792
+    "value": 9.642697
    }
   },
   "spy_rsi2": {
    "benchmark_start": 682.3851755714182,
-   "cash": 0.0,
-   "fills": 1,
+   "cash": 10.079289529945877,
+   "fills": 2,
    "last_target_bar": "2026-11-23 00:00:00",
    "order_seq": 3,
-   "pending": {
-    "instruction": {
-     "SPY": 0.0
-    },
-    "order_id": "spy_rsi2-00003",
-    "recorded_at": "2026-11-24 06:06:13.091534"
-   },
+   "pending": null,
    "start_bar": "2026-11-12 00:00:00",
-   "units": {
-    "SPY": 0.015311493652533224
-   },
+   "units": {},
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
-    "holding": {
-     "SPY": 1.0
-    },
-    "value": 10.080061
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
+    "holding": {},
+    "value": 10.07929
    }
   },
   "stock_momentum": {
@@ -200,14 +190,14 @@
     "MSFT": 0.007023975490036418
    },
    "view": {
-    "bar": "2026-11-23 00:00:00",
-    "benchmark_value": 9.647527,
+    "bar": "2026-11-24 00:00:00",
+    "benchmark_value": 9.656445,
     "holding": {
-     "AAPL": 0.342,
-     "JNJ": 0.3299,
-     "MSFT": 0.3281
+     "AAPL": 0.3417,
+     "JNJ": 0.3327,
+     "MSFT": 0.3256
     },
-    "value": 9.608815
+    "value": 9.810959
    }
   }
  }
