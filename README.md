@@ -2,18 +2,18 @@
 
 **Simulated money only.** Ten rule-based strategies, each starting with an imaginary €10. No broker is connected and no real order is ever placed. This is an experiment, not investment advice.
 
-_Last updated: 2026-11-27 08:59 UTC. Updated automatically by GitHub Actions._
+_Last updated: 2026-11-27 18:51 UTC. Updated automatically by GitHub Actions._
 
 ## Live paper portfolio (record started 2026-11-13 03:54 UTC)
 
 **Strategies: €100.00 → €97.03 (-3.0%)**  
-**Just holding each benchmark: €100.00 → €92.81 (-7.2%)**
+**Just holding each benchmark: €100.00 → €92.59 (-7.4%)**
 
 | # | Strategy | €10 is now | Hold instead | Holding now | Waiting order | Fills |
 |---|---|---|---|---|---|---|
 | 1 | Bitcoin trend following (50/200-day) | €8.82 (-11.8%) | €8.48 BTC | BTC +100% |  | 1 |
 | 2 | Ether 20-day breakout | €10.00 (+0.0%) | €8.43 ETH | cash |  | 0 |
-| 3 | Bitcoin intraday mean reversion (hourly) | €9.82 (-1.8%) | €8.84 BTC | cash |  | 15 |
+| 3 | Bitcoin intraday mean reversion (hourly) | €9.82 (-1.8%) | €8.62 BTC | cash | yes | 15 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | €9.57 (-4.3%) | €9.58 SPY | SPY +100% |  | 1 |
 | 5 | ETF rotation, top 2 of 5, monthly | €9.58 (-4.2%) | €9.58 SPY | EFA +50%, SPY +50% |  | 1 |
 | 6 | Stock momentum, top 3 of 12, monthly | €9.71 (-2.9%) | €9.58 SPY | AAPL +35%, JNJ +33%, MSFT +32% |  | 1 |
@@ -32,6 +32,7 @@ Recorded now, filled at the close of the next finished price bar.
 
 | Order | Recorded (UTC) | Instruction |
 |---|---|---|
+| btc_intraday-00018 | 2026-11-27 18:51 | BTC +100% |
 | futures_trend-00006 | 2026-11-27 04:18 | BZ -33%, ES -33%, GC -33% |
 
 ### Latest fills
@@ -77,7 +78,7 @@ This is history, not evidence that the rules will work. Fees are included. "Hold
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Bitcoin trend following (50/200-day) | 2018-01-01 → 2026-11-26 | +232.9% | +14.5% | -63.3% | 0.52 | +384.9% BTC | -80.4% | 0.60 | 18 | €1.35 |
 | 2 | Ether 20-day breakout | 2018-01-01 → 2026-11-26 | +2865.7% | +46.4% | -51.5% | 0.99 | +139.1% ETH | -93.5% | 0.54 | 127 | €62.24 |
-| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-27 | -88.9% | -66.0% | -89.8% | -4.47 | -32.5% BTC | -52.8% | -0.21 | 726 | €9.66 |
+| 3 | Bitcoin intraday mean reversion (hourly) | 2024-11-13 → 2026-11-27 | -89.0% | -66.2% | -89.8% | -4.49 | -34.2% BTC | -52.8% | -0.23 | 727 | €9.66 |
 | 4 | S&P 500 ETF buy and hold (benchmark) | 2018-01-02 → 2026-11-25 | +233.6% | +14.5% | -33.1% | 0.77 | +233.6% SPY | -33.1% | 0.77 | 0 | €0.00 |
 | 5 | ETF rotation, top 2 of 5, monthly | 2018-01-02 → 2026-11-25 | +62.2% | +5.6% | -34.0% | 0.38 | +233.6% SPY | -33.1% | 0.77 | 228 | €0.49 |
 | 6 | Stock momentum, top 3 of 12, monthly | 2018-01-02 → 2026-11-25 | +479.3% | +21.8% | -29.9% | 0.92 | +233.6% SPY | -33.1% | 0.77 | 398 | €2.05 |
