@@ -5,28 +5,18 @@
  "strategies": {
   "btc_intraday": {
    "benchmark_start": 63468.699,
-   "cash": 0.0,
-   "fills": 16,
+   "cash": 9.784887692106022,
+   "fills": 17,
    "last_target_bar": "2026-11-28 02:00:00",
    "order_seq": 19,
-   "pending": {
-    "instruction": {
-     "BTC": 0.0
-    },
-    "order_id": "btc_intraday-00019",
-    "recorded_at": "2026-11-28 03:56:08.017605"
-   },
+   "pending": null,
    "start_bar": "2026-11-13 02:00:00",
-   "units": {
-    "BTC": 0.00017895412304700826
-   },
+   "units": {},
    "view": {
-    "bar": "2026-11-28 02:00:00",
-    "benchmark_value": 8.633095,
-    "holding": {
-     "BTC": 1.0
-    },
-    "value": 9.805456
+    "bar": "2026-11-28 07:00:00",
+    "benchmark_value": 8.62058,
+    "holding": {},
+    "value": 9.784888
    }
   },
   "btc_trend": {
@@ -42,11 +32,11 @@
    },
    "view": {
     "bar": "2026-11-27 00:00:00",
-    "benchmark_value": 8.645078,
+    "benchmark_value": 8.410207,
     "holding": {
      "BTC": 1.0
     },
-    "value": 8.989556
+    "value": 8.745326
    }
   },
   "cash_secured_put": {
@@ -121,7 +111,7 @@
    "units": {},
    "view": {
     "bar": "2026-11-27 00:00:00",
-    "benchmark_value": 8.642063,
+    "benchmark_value": 8.314096,
     "holding": {},
     "value": 10.0
    }
@@ -130,9 +120,17 @@
    "benchmark_start": 682.3851755714182,
    "cash": 20.013109768947565,
    "fills": 6,
-   "last_target_bar": "2026-11-26 00:00:00",
-   "order_seq": 6,
-   "pending": null,
+   "last_target_bar": "2026-11-27 00:00:00",
+   "order_seq": 7,
+   "pending": {
+    "instruction": {
+     "BZ": 0.3333333333333333,
+     "ES": -0.3333333333333333,
+     "GC": -0.3333333333333333
+    },
+    "order_id": "futures_trend-00007",
+    "recorded_at": "2026-11-28 08:20:57.668851"
+   },
    "start_bar": "2026-11-12 00:00:00",
    "units": {
     "BZ": -0.04028802320854792,
@@ -143,11 +141,11 @@
     "bar": "2026-11-27 00:00:00",
     "benchmark_value": 9.727537,
     "holding": {
-     "BZ": -0.3333,
-     "ES": -0.3333,
-     "GC": -0.3333
+     "BZ": -0.3553,
+     "ES": -0.3382,
+     "GC": -0.3355
     },
-    "value": 10.006555
+    "value": 9.863926
    }
   },
   "spy_hold": {
